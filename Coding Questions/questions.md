@@ -2,7 +2,7 @@
 
 ## Google
 
-- <https://leetcode.com/problems/text-justification>
+- [] <https://leetcode.com/problems/text-justification>
 - <https://leetcode.com/problems/decode-string>
 - <https://leetcode.com/problems/random-pick-with-weight>
 - <https://leetcode.com/problems/time-based-key-value-store>
