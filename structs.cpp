@@ -6,8 +6,15 @@ using namespace std;
 
 #define int long long
 
-struct comp
+class comp
 {
+    int k;
+public:
+    comp(int val)
+    {
+        k=val;
+    }
+    
     bool operator()(/*take the argument here ex:- int a,int b*/) //////// add const here if not working /////////
     {
         /////// write the code here /////////////
@@ -24,7 +31,7 @@ void solve()
     ////////////// Notice the comp in both these declaration ////////////
 
 
-    priority_queue<type,vector<type>,comp> pq;
+    priority_queue<type,vector<type>,comp> pq({comp(val)});////////if you wanted to use third variables........
 
 
     vector<type> arr;
