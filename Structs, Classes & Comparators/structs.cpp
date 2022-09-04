@@ -12,9 +12,9 @@ class comp
 public:
     comp(int val)
     {
-        k=val;
+        k = val;
     }
-    
+
     bool operator()(/*take the argument here ex:- int a,int b*/) //////// add const here if not working /////////
     {
         /////// write the code here /////////////

@@ -6,7 +6,7 @@ using namespace std;
 
 class shortest_path
 {
-    vector<int> bfs(vector<int> adj[], vector<int> &dist, int source)
+    void bfs(vector<int> adj[], vector<int>& dist, int source)
     {
         queue<int> qu;
         qu.push(source);

@@ -10,17 +10,19 @@ class Trie {
         Node* links[26]; // array to store the links to other nodes
         int end = 0; // counter for the number of complete strings
         int curr = 0; // counter for the prefix strings
-
+        // function to check the existance of the key
         bool check_key(char ch) {
             if (links[ch - 'a'] != NULL)
                 return true;
             return false;
         }
 
+        // function to insert node at given key
         void put(char ch, Node* curr) {
             links[ch - 'a'] = curr;
         }
 
+        // function to get the node corresponding to given key
         Node* get_link(char ch) {
             return links[ch - 'a'];
         }
