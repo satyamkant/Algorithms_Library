@@ -10,24 +10,30 @@ using namespace std;
 
 ///////////////////////// in this NCR class N and R can be very large but MOD is small //////////////////////////
 class NCR {
+    class Modulo_exponentiation {
+        int binpow(int a, int b, int m) {
+            a %= m;
+            int res = 1;
+            while (b > 0) {
+                if (b & 1)
+                    res = res * a % m;
+                a = a * a % m;
+                b >>= 1;
+            }
+            return res;
+        }
+    public:
+        int power(int a, int b, int m) {
+            return binpow(a, b, m);
+        }
+    };
+
+
     int mod = 1000003;
     vector<int> fac;
     vector<int> fac_inv;
-    int power(int n, int m) {
-        int res = 1;
-        n %= mod;
-        while (m > 0) {
-            if (m & 1) {
-                res = (1LL * res * n) % mod;
-                m--;
-            }
-            else {
-                n = (1LL * n * n) % mod;
-                m /= 2;
-            }
-        }
-        return res % mod;
-    }
+
+
     int fermat(int n, int r) {
         n %= mod, r %= mod;
         if (n < r) return 0;
@@ -49,12 +55,14 @@ public:
         for (int i = 1; i < mod; i++)
             fac[i] = (1LL * fac[i - 1] * i) % mod;
 
-        fac_inv[mod - 1] = power(fac[mod - 1], mod - 2);
+        Modulo_exponentiation modexpo;
+
+        fac_inv[mod - 1] = modexpo.power(fac[mod - 1], mod - 2, mod);
         for (int i = mod - 2; i > 0; i--)
             fac_inv[i] = (1LL * fac_inv[i + 1] * (i + 1)) % mod;
     }
 
-    int nCr(long long n, long long r) {
+    int get_ncr(int n, int r) {
         return lucas(n, r);
     }
 };
@@ -101,7 +109,7 @@ public:
         precompute(n);
     }
 
-    long long get_ncr(long long n, long long r) {
+    int get_ncr(int n, int r) {
         return computeCombinatorics(n, r);
     }
 };
