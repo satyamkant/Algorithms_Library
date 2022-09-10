@@ -1,3 +1,5 @@
+// https://leetcode.com/problems/maximum-number-of-robots-within-budget/
+
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -45,7 +47,7 @@ class segment_tree {
         int left = query(2 * Node + 1, tl, mid, l, r);
         int right = query(2 * Node + 2, mid + 1, tr, l, r);
 
-        return operation(left, right); // returning the sum
+        return operation(left, right);
     }
 
     void update(int Node, int tl, int tr, int pos, int new_val) {
@@ -59,7 +61,7 @@ class segment_tree {
             else // if updating index lies on the right of mid
                 update(2 * Node + 2, mid + 1, tr, pos, new_val);
 
-            tree[Node] = operation(tree[2 * Node + 1], tree[2 * Node + 2]); // updating the new sum values
+            tree[Node] = operation(tree[2 * Node + 1], tree[2 * Node + 2]); // updating node value
         }
     }
 
