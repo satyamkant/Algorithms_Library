@@ -15,5 +15,10 @@ int32_t main() {
         bits[i] = ((curr >> i) & 1);
     }
 
+    // setting ith bit /////////
+    for (int i = 0;i < 32;i++) {
+        curr != (1 << i);
+    }
+
     return 0;
 }
