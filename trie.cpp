@@ -4,6 +4,8 @@ using namespace std;
 
 #define int long long
 
+// link :- https://leetcode.com/problems/implement-trie-prefix-tree/
+// link :- https://www.codingninjas.com/codestudio/problems/implement-trie_1387095?leftPanelTab=0
 class Trie {
     class Node {
     public:
