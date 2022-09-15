@@ -9,59 +9,23 @@ using namespace std;
 
 #define int long long
 
-int grid[1001][1001];
-
-void solve()
-{
-    int n, q;
-    cin >> n >> q;
-
-    memset(grid, 0, sizeof(grid));
-
-    while (n--) {
-        int i, j;
-        cin >> i >> j;
-        grid[i][j] += i * j;
-    }
-
-    for (int i = 1;i < 1001;i++) {
-        for (int j = 1;j < 1001;j++) {
-            grid[i][j] += grid[i][j - 1];
+class Pref_suff_2d {
+    int sum[1001][1001];
+public:
+    void build(int n, int m, vector<vector<int>>& arr) {
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                sum[i][j] = sum[i - 1][j] + sum[i][j - 1] - sum[i - 1][j - 1] + arr[i - 1][j - 1];
+            }
         }
     }
 
-    for (int j = 1;j < 1001;j++) {
-        for (int i = 1;i < 1001;i++) {
-            grid[i][j] += grid[i - 1][j];
-        }
+    int get_sum(int u, int v, int i, int j) {
+        return  sum[u][v] - sum[i][v] - sum[u][j] + sum[i][j];
     }
-
-    while (q--) {
-        int a, b, A, B;
-
-        cin >> a >> b >> A >> B;
-        a++;
-        b++;
-        A--;
-        B--;
-        cout << grid[A][B] - grid[a - 1][B] - grid[A][b - 1] + grid[a - 1][b - 1] << endl;
-    }
-
-}
+};
 
 int32_t main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-
-    // test case...;
-    int t = 1;
-    cin >> t;
-    // test case end...;
-    for (int i = 1; i <= t; i++)
-    {
-        // cout<<"Case #"<<i<<": ";
-        solve();
-    }
     return 0;
 }
