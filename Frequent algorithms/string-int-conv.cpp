@@ -4,7 +4,7 @@ using namespace std;
 
 
 //////// function to convert string to integer //////////
-int conv(string s) {
+int stoi(string s) {
     int num;
 
     stringstream temp(s);
@@ -14,7 +14,8 @@ int conv(string s) {
 
 }
 
-string conv(int n) {
+//////// function to convert integer to string /////////
+string itos(int n) {
     if (n == 0)
         return "0";
     string s = "";
