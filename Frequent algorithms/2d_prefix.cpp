@@ -1,6 +1,3 @@
-// https://usaco.guide/silver/more-prefix-sums?lang=cpp#2d-prefix-sums
-// https://codeforces.com/problemset/problem/1722/E
-
 // Author:- satyam kant//
 
 #include <bits/stdc++.h>
@@ -8,6 +5,9 @@
 using namespace std;
 
 #define int long long
+
+// link:- https://usaco.guide/silver/more-prefix-sums?lang=cpp#2d-prefix-sums
+// link:- https://codeforces.com/problemset/problem/1722/E
 
 class Pref_suff_2d {
     int sum[1001][1001];
@@ -20,8 +20,8 @@ public:
         }
     }
 
-    int get_sum(int u, int v, int i, int j) {
-        return  sum[u][v] - sum[i][v] - sum[u][j] + sum[i][j];
+    int get_sum(int x1, int y1, int x2, int y2) {
+        return  sum[x1][y1] - sum[x2][y1] - sum[x1][y2] + sum[x2][y2];
     }
 };
 

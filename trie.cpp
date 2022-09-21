@@ -6,6 +6,7 @@ using namespace std;
 
 // link :- https://leetcode.com/problems/implement-trie-prefix-tree/
 // link :- https://www.codingninjas.com/codestudio/problems/implement-trie_1387095?leftPanelTab=0
+// link :- https://leetcode.com/problems/sum-of-prefix-scores-of-strings/
 class Trie {
     class Node {
     public:
@@ -20,8 +21,13 @@ class Trie {
         }
 
         // function to insert node at given key
-        void put(char ch, Node* curr) {
-            links[ch - 'a'] = curr;
+        void put(char ch) {
+            links[ch - 'a'] = new Node();
+        }
+
+        // function to delete node at given key
+        void del(char ch) {
+            links[ch - 'a'] = NULL;
         }
 
         // function to get the node corresponding to given key
@@ -57,7 +63,7 @@ public:
                 temp = temp->get_link(it);
             }
             else {
-                temp->put(it, new Node());
+                temp->put(it);
                 temp = temp->get_link(it);
             }
             temp->inc_curr();
@@ -87,17 +93,21 @@ public:
 
     void erase(string& word) {
         Node* temp = Root;
+        Node* last = Root;
+        char last_ch = word[0];
         for (auto it : word) {
-            if (temp->check_key(it)) {
-                temp = temp->get_link(it);
-            }
-            else {
-                temp->put(it, new Node());
-                temp = temp->get_link(it);
-            }
+            last = temp;
+            temp = temp->get_link(it);
             temp->dec_curr();
+            if (!temp->curr) {
+                last->del(last_ch);
+            }
+            last_ch = it;
         }
         temp->dec_end();
+        if (!temp->end) {
+            last->del(last_ch);
+        }
     }
 };
 
