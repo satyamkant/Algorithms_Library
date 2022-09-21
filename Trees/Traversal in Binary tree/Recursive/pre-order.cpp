@@ -1,3 +1,5 @@
+// Author:- satyam kant//
+
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -8,8 +10,8 @@ class Node
 {
 public:
     int data;
-    Node *left;
-    Node *right;
+    Node* left;
+    Node* right;
 
     Node(int val)
     {
@@ -19,7 +21,7 @@ public:
     }
 };
 
-void PreOrder(Node *node)
+void PreOrder(Node* node)
 {
     if (node == NULL)
         return;
@@ -31,7 +33,7 @@ void PreOrder(Node *node)
 
 int32_t main()
 {
-    Node *root = new Node(1);
+    Node* root = new Node(1);
 
     root->left = new Node(2);
     root->right = new Node(3);

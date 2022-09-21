@@ -1,3 +1,5 @@
+// Author:- satyam kant//
+
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -8,8 +10,8 @@ class Node
 {
 public:
     int data;
-    Node *left;
-    Node *right;
+    Node* left;
+    Node* right;
 
     Node(int val)
     {
@@ -19,30 +21,30 @@ public:
     }
 };
 
-void Topview(Node *root)
+void Topview(Node* root)
 {
     vector<int> ans;
     if (!root)
         return;
 
     map<int, int> mp;
-    queue<pair<Node *, int>> qu;
-    qu.push({root, 0});
+    queue<pair<Node*, int>> qu;
+    qu.push({ root, 0 });
 
     while (!qu.empty())
     {
         auto it = qu.front();
         qu.pop();
 
-        Node *node = it.first;
+        Node* node = it.first;
         int line = it.second;
         if (mp.find(line) == mp.end())
             mp[line] = node->data;
 
         if (node->left)
-            qu.push({node->left, line - 1});
+            qu.push({ node->left, line - 1 });
         if (node->right)
-            qu.push({node->right, line + 1});
+            qu.push({ node->right, line + 1 });
     }
 
     for (auto it : mp)
@@ -54,7 +56,7 @@ void Topview(Node *root)
 
 int32_t main()
 {
-    Node *root = new Node(1);
+    Node* root = new Node(1);
 
     root->left = new Node(2);
     root->right = new Node(3);

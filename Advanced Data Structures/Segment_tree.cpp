@@ -1,10 +1,12 @@
-// https://leetcode.com/problems/maximum-number-of-robots-within-budget/
+// Author:- satyam kant//
 
 #include <bits/stdc++.h>
 
 using namespace std;
 
 #define int long long
+
+// link:- https://leetcode.com/problems/maximum-number-of-robots-within-budget/
 
 class segment_tree {
     // tl and tr are used for the tree only 

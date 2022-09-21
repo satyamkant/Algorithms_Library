@@ -1,3 +1,5 @@
+// Author:- satyam kant//
+
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -8,8 +10,8 @@ class Node
 {
 public:
     int data;
-    Node *left;
-    Node *right;
+    Node* left;
+    Node* right;
 
     Node(int val)
     {
@@ -19,9 +21,9 @@ public:
     }
 };
 
-void leftboundary(Node *root, vector<int> &ans)
+void leftboundary(Node* root, vector<int>& ans)
 {
-    Node *curr = root->left;
+    Node* curr = root->left;
 
     while (curr)
     {
@@ -34,9 +36,9 @@ void leftboundary(Node *root, vector<int> &ans)
     }
 }
 
-void rightboundary(Node *root, vector<int> &ans)
+void rightboundary(Node* root, vector<int>& ans)
 {
-    Node *curr = root->right;
+    Node* curr = root->right;
     vector<int> temp;
     while (curr)
     {
@@ -52,7 +54,7 @@ void rightboundary(Node *root, vector<int> &ans)
         ans.push_back(temp[i]);
 }
 
-void leafboundary(Node *curr, vector<int> &ans)
+void leafboundary(Node* curr, vector<int>& ans)
 {
     if (curr->left == NULL && curr->right == NULL)
     {
@@ -68,7 +70,7 @@ void leafboundary(Node *curr, vector<int> &ans)
 
 int32_t main()
 {
-    Node *root = new Node(1);
+    Node* root = new Node(1);
 
     root->left = new Node(2);
     root->right = new Node(3);

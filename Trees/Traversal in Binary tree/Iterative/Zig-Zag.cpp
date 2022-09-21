@@ -1,3 +1,5 @@
+// Author:- satyam kant//
+
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -8,8 +10,8 @@ class Node
 {
 public:
     int data;
-    Node *left;
-    Node *right;
+    Node* left;
+    Node* right;
 
     Node(int val)
     {
@@ -19,14 +21,14 @@ public:
     }
 };
 
-vector<vector<int>> ZigZag(Node *node)
+vector<vector<int>> ZigZag(Node* node)
 {
     vector<vector<int>> ans;
 
     if (node == NULL)
         return ans;
     bool rev = false;
-    queue<Node *> qu;
+    queue<Node*> qu;
     qu.push(node);
     while (!qu.empty())
     {
@@ -34,7 +36,7 @@ vector<vector<int>> ZigZag(Node *node)
         int sz = qu.size();
         for (int i = 0; i < sz; i++)
         {
-            Node *curr = qu.front();
+            Node* curr = qu.front();
             qu.pop();
             if (curr->left)
                 qu.push(curr->left);
@@ -55,7 +57,7 @@ vector<vector<int>> ZigZag(Node *node)
 
 int32_t main()
 {
-    Node *root = new Node(1);
+    Node* root = new Node(1);
 
     root->left = new Node(2);
     root->right = new Node(3);

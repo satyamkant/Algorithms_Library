@@ -1,3 +1,5 @@
+// Author:- satyam kant//
+
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -8,8 +10,8 @@ class Node
 {
 public:
     int data;
-    Node *left;
-    Node *right;
+    Node* left;
+    Node* right;
 
     Node(int val)
     {
@@ -19,14 +21,14 @@ public:
     }
 };
 
-vector<int> PostOrder(Node *node)
+vector<int> PostOrder(Node* node)
 {
     vector<int> ans;
     if (node == NULL)
         return ans;
 
-    stack<Node *> st1;
-    stack<Node *> st2;
+    stack<Node*> st1;
+    stack<Node*> st2;
     st1.push(node);
 
     while (!st1.empty())
@@ -52,7 +54,7 @@ vector<int> PostOrder(Node *node)
 
 int32_t main()
 {
-    Node *root = new Node(1);
+    Node* root = new Node(1);
 
     root->left = new Node(2);
     root->right = new Node(3);

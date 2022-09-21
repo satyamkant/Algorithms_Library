@@ -1,3 +1,5 @@
+// Author:- satyam kant//
+
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -8,8 +10,8 @@ class Node
 {
 public:
     int data;
-    Node *left;
-    Node *right;
+    Node* left;
+    Node* right;
 
     Node(int val)
     {
@@ -19,25 +21,25 @@ public:
     }
 };
 
-vector<vector<int>> verticalTraversal(Node *root)
+vector<vector<int>> verticalTraversal(Node* root)
 {
     vector<vector<int>> ans;
     map<int, map<int, multiset<int>>> mp;
-    queue<pair<Node *, pair<int, int>>> qu;
-    qu.push({root, {0, 0}});
+    queue<pair<Node*, pair<int, int>>> qu;
+    qu.push({ root, {0, 0} });
 
     while (!qu.empty())
     {
         auto temp = qu.front();
         qu.pop();
 
-        Node *node = temp.first;
+        Node* node = temp.first;
         int x = temp.second.first, y = temp.second.second;
         mp[x][y].insert(node->data);
         if (node->left)
-            qu.push({node->left, {x - 1, y + 1}});
+            qu.push({ node->left, {x - 1, y + 1} });
         if (node->right)
-            qu.push({node->right, {x + 1, y + 1}});
+            qu.push({ node->right, {x + 1, y + 1} });
     }
 
     for (auto it : mp)
@@ -54,7 +56,7 @@ vector<vector<int>> verticalTraversal(Node *root)
 
 int32_t main()
 {
-    Node *root = new Node(1);
+    Node* root = new Node(1);
 
     root->left = new Node(2);
     root->right = new Node(3);
