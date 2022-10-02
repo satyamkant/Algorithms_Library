@@ -6,6 +6,30 @@ using namespace std;
 
 #define int long long
 
+// to precalculate divisors of numbers from 1 to 100000 //////
+class precal_div {
+    vector<int> divisor[100001];
+    void prec() {
+        divisor[1].push_back(1);
+        for (int i = 2;i <= 100000;i++) {
+            for (int j = i;j <= 100000;j += i) {
+                divisor[j].push_back(i);
+            }
+        }
+    }
+
+public:
+    precal_div() {
+        prec();
+    };
+
+    vector<int>& get_fact(int id) {
+        return divisor[id];
+    }
+};
+/////////////////////////////////////////////////////////////
+
+//// class to get primeFactors of a number ///////////////////
 class PrimFactors {
     vector<int> get_factors(int n) {
         vector<int> arr;
@@ -33,7 +57,9 @@ public:
         return get_factors(n);
     }
 };
+////////////////////////////////////////////////
 
+//////// Sieve of Eratosthenes ////////////////
 class Sieve {
     vector <bool> isPrime;
 public:
@@ -52,6 +78,7 @@ public:
         return isPrime[id];
     }
 };
+/////////////////////////////////////////////////
 
 int32_t main() {
     return 0;
