@@ -6,7 +6,7 @@ using namespace std;
 
 #define int long long
 
-// to precalculate divisors of numbers from 1 to 100000 //////
+// to precalculate divisors (factors) of numbers from 1 to 100000 //////
 class precal_div {
     vector<int> divisor[100001];
     void prec() {

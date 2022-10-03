@@ -6,8 +6,8 @@ using namespace std;
 
 
 //////// function to convert string to integer //////////
-int stoi(string s) {
-    int num;
+int Stoi(string s) {
+    int num = 0;
 
     stringstream temp(s);
     temp >> num;
