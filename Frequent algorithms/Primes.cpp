@@ -6,6 +6,26 @@ using namespace std;
 
 #define int long long
 
+// to get the divisors of a number ///////
+class Divisors {
+    vector<int> divisor(int n) {
+        vector<int> arr;
+        for (int i = 1;i * i <= n;i++) {
+            if (n % i == 0) {
+                arr.push_back(i);
+                if (n / i != i) {
+                    arr.push_back(n / i);
+                }
+            }
+        }
+        return arr;
+    }
+public:
+    vector<int> get_divisor(int n) {
+        return divisor(n);
+    }
+};
+
 // to precalculate divisors (factors) of numbers from 1 to 100000 //////
 class precal_div {
     vector<int> divisor[100001];
@@ -33,23 +53,13 @@ public:
 class PrimFactors {
     vector<int> get_factors(int n) {
         vector<int> arr;
-        while (n % 2 == 0)
-        {
-            arr.push_back(2);
-            n = n / 2;
-        }
-
-        for (int i = 3; i <= sqrt(n); i = i + 2)
-        {
-            while (n % i == 0)
-            {
-                arr.push_back(i);
-                n = n / i;
+        for (int x = 2; x * x <= n; x++) {
+            while (n % x == 0) {
+                arr.push_back(x);
+                n /= x;
             }
         }
-        if (n > 2)
-            arr.push_back(n);
-
+        if (n > 1) arr.push_back(n);
         return arr;
     }
 public:
