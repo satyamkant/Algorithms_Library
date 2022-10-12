@@ -21,6 +21,8 @@ int32_t main() {
     }
 
     // represent a number as power of k //
+    /// a number can be represented as num = c1*k^0 + c2*k^1 + c3*k^2 + .... ///////
+    ////////////////////////////////////// here c1,c2,c3 can be 0 also /////////////
     int n,k;
     while (n) {
         cout << n % k << " ";
