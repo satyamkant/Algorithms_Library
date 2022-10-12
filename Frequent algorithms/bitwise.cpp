@@ -20,5 +20,12 @@ int32_t main() {
         curr != (1 << i);
     }
 
+    // represent a number as power of k //
+    int n,k;
+    while (n) {
+        cout << n % k << " ";
+        n /= k;
+    }
+
     return 0;
 }
