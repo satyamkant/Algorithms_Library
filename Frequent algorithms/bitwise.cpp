@@ -17,7 +17,7 @@ int32_t main() {
 
     // setting ith bit /////////
     for (int i = 0;i < 32;i++) {
-        curr != (1 << i);
+        curr |= (1 << i);
     }
 
     // represent a number as power of k //
