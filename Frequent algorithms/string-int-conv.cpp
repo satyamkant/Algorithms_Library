@@ -4,6 +4,19 @@
 
 using namespace std;
 
+///////// function to convert string to integer with modulo ///////////
+int Stoimod(string num, int mod)
+{
+    // Initialize result
+    int res = 0;
+ 
+    // One by one process all digits of 'num'
+    for (int i = 0; i < num.length(); i++)
+        res = (res * 10 + (int)num[i] - '0') % mod;
+ 
+    return res;
+}
+
 
 //////// function to convert string to integer //////////
 int Stoi(string s) {
