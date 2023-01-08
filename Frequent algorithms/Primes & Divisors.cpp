@@ -90,6 +90,45 @@ public:
 };
 /////////////////////////////////////////////////
 
+////////////////////////////////////////////////
+///////// prim factors in repeated query////////
+///////// O(log(n)) ////////////////////////////
+
+int N = 10000005;
+vector<int> spf(N + 1, 1);
+void sieve()
+{
+    int i, j;
+    for(int i=2; i<N;i++)
+    {
+        if (spf[i] == 1)
+        {
+            spf[i] = i;
+            for (j = i * i; j <= N; j += i)
+            {
+                if (spf[j] == 1)spf[j] = i;
+            }
+        }
+    }
+}
+vector<int> factorize(int n)
+{
+    vector<int> ans;
+    while (n > 1)
+    {
+        int fact = spf[n];
+        while (n % fact == 0)
+        {
+            n /= fact;
+        }
+        ans.push_back(fact);
+    }
+    return ans;
+}
+
+/////////////////////////////////////////////
+////////////////////////////////////////////
+
 int32_t main() {
     return 0;
 }
