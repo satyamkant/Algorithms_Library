@@ -44,6 +44,10 @@ public:
         return query(r) - query(l - 1);
     }
 
+    void update(int id, int val) {
+        do_operation(id, val);
+    }
+
 };
 
 int32_t main() {
