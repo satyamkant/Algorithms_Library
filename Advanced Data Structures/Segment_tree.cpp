@@ -95,7 +95,8 @@ class segment_tree {
     vector<int> lazy;
 
     // function to change the logic
-    int operation(int a, int b) { return a + b; }
+    int operation(int a, int b) { return __gcd(a, b); } // gcd is done here as example
+    void lazy_operation(int& a, int& b) { a *= b; } // multiply operation is done here as example
 
     void build(vector<int>& arr, int Node, int tl, int tr) {
         if (tl == tr) {
@@ -115,11 +116,11 @@ class segment_tree {
     }
 
     void push(int Node) {
-        tree[Node * 2 + 1] += lazy[Node];
-        lazy[Node * 2 + 1] += lazy[Node];
-        tree[Node * 2 + 2] += lazy[Node];
-        lazy[Node * 2 + 2] += lazy[Node];
-        lazy[Node] = 0;
+        lazy_operation(tree[Node * 2 + 1], lazy[Node]);
+        lazy_operation(lazy[Node * 2 + 1], lazy[Node]);
+        lazy_operation(tree[Node * 2 + 2], lazy[Node]);
+        lazy_operation(lazy[Node * 2 + 2], lazy[Node]);
+        lazy[Node] = 1;
     }
 
     int query(int Node, int tl, int tr, int l, int r) {
@@ -129,7 +130,7 @@ class segment_tree {
             return tree[Node];
         push(Node);
         int mid = (tl + tr) >> 1;
-        return max(query(Node * 2 + 1, tl, mid, l, min(r, mid)),
+        return operation(query(Node * 2 + 1, tl, mid, l, min(r, mid)),
             query(Node * 2 + 2, mid + 1, tr, max(l, mid + 1), r));
     }
 
@@ -137,24 +138,26 @@ class segment_tree {
         if (l > r)
             return;
         if (l == tl && tr == r) {
-            tree[Node] += val;
-            lazy[Node] += val;
+            lazy_operation(tree[Node], val);
+            lazy_operation(lazy[Node], val);
         }
         else {
             push(Node);
             int tm = (tl + tr) >> 1;
             range_update(Node * 2 + 1, tl, tm, l, min(r, tm), val);
             range_update(Node * 2 + 2, tm + 1, tr, max(l, tm + 1), r, val);
-            tree[Node] = max(tree[Node * 2 + 1], tree[Node * 2 + 2]);
+            tree[Node] = operation(tree[Node * 2 + 1], tree[Node * 2 + 2]);
         }
     }
 
 public:
-    void construct(int N) {
+    void construct(vector<int>& arr, int N) {
         this->N = N;
+        tree.clear();
+        lazy.clear();
         tree.resize(4 * N);
-        lazy.resize(4 * N);
-        // build(arr, 0, 0, N - 1);
+        lazy.resize(4 * N, 1);
+        build(arr, 0, 0, N - 1);
     }
 
     int get_query(int l, int r) { return query(0, 0, N - 1, l, r); }
@@ -163,6 +166,7 @@ public:
         range_update(0, 0, N - 1, l, r, val);
     }
 };
+
 
 int32_t main()
 {
