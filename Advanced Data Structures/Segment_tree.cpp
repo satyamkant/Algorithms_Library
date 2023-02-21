@@ -168,6 +168,84 @@ public:
 };
 
 
+
+
+/////////////////////////////////////testing testing testing///////////////////////////////////
+class segment_tree {
+public:
+    vector<long long> tree;
+    vector<long long> lazy;
+
+    segment_tree(int n) {
+        tree.resize(4 * n + 1);
+        lazy.resize(4 * n + 1);
+    }
+
+    void build(vector<int>& arr, int Node, int tl, int tr) {
+        if (tl == tr) {
+            tree[Node] = arr[tl];
+            return;
+        }
+
+        int mid = (tl + tr) >> 1;
+
+        build(arr, 2 * Node + 1, tl, mid);
+        build(arr, 2 * Node + 2, mid + 1, tr);
+        tree[Node] = tree[2 * Node + 1] + tree[2 * Node + 2];
+    }
+
+    void range_update(int Node, int tl, int tr, int l, int r) {
+        if (lazy[Node] != 0) {
+            tree[Node] = (tr - tl + 1) - tree[Node];
+            if (tl != tr) {
+                lazy[2 * Node + 1] ^= 1;
+                lazy[2 * Node + 2] ^= 1;
+            }
+            lazy[Node] ^= 1;
+        }
+
+        if (tr<l || tl>r || tl > tr)
+            return;
+
+        if (tl >= l && tr <= r) {
+            tree[Node] = (tr - tl + 1) - tree[Node];
+            if (tl != tr) {
+                lazy[2 * Node + 1] ^= 1;
+                lazy[2 * Node + 2] ^= 1;
+            }
+            return;
+        }
+
+        int mid = (tl + tr) >> 1;
+
+        range_update(2 * Node + 1, tl, mid, l, r);
+        range_update(2 * Node + 2, mid + 1, tr, l, r);
+        tree[Node] = tree[2 * Node + 1] + tree[2 * Node + 2];
+    }
+    long long query(int Node, int tl, int tr, int l, int r) {
+        if (lazy[Node] != 0) {
+            tree[Node] = (tr - tl + 1) - tree[Node];
+            if (tl != tr) {
+                lazy[2 * Node + 1] ^= 1;
+                lazy[2 * Node + 2] ^= 1;
+            }
+            lazy[Node] ^= 1;
+        }
+
+        if (tr<l || tl>r || tl > tr)
+            return 0;
+
+        if (tl >= l && tr <= r)
+            return tree[Node];
+
+
+        int mid = (tl + tr) >> 1;
+
+        return query(2 * Node + 1, tl, mid, l, r) + query(2 * Node + 2, mid + 1, tr, l, r);
+    }
+};
+///////////////////////////////////////testing testing testing//////////////////////////////////////////
+
 int32_t main()
 {
     return 0;
