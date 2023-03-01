@@ -6,7 +6,7 @@ using namespace std;
 
 #define int long long
 
-// link:- https://leetcode.com/problems/maximum-number-of-robots-within-budget/
+//////// link:- https://leetcode.com/problems/maximum-number-of-robots-within-budget/ /////////////////
 
 class segment_tree {
     // tl and tr are used for the tree only 
@@ -169,8 +169,8 @@ public:
 
 
 
-
-/////////////////////////////////////testing testing testing///////////////////////////////////
+////////////////////////////////// flipping 0 to 1 and vice versa in given range //////////////////////
+//// Link:- https://leetcode.com/problems/handling-sum-queries-after-update/solutions/ ////////////////
 class segment_tree {
 public:
     vector<long long> tree;
@@ -244,7 +244,88 @@ public:
         return query(2 * Node + 1, tl, mid, l, r) + query(2 * Node + 2, mid + 1, tr, l, r);
     }
 };
-///////////////////////////////////////testing testing testing//////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+
+/////////////// segment tree for maximum subarry sum ////////////////////////////
+///////// Link:- https://codeforces.com/contest/1796/problem/D //////////////////
+class segment_tree {
+    class Data {
+    public:
+        int mx;
+        int pre;
+        int suf;
+        int sum;
+    };
+    int N;
+    vector<Data> tree;
+
+    Data operation(Data a, Data b) {
+        return { max(max(a.mx, b.mx), a.suf + b.pre), max(a.pre, a.sum + b.pre),
+                max(b.suf, a.suf + b.sum), a.sum + b.sum };
+    }
+
+    void build(vector<int>& arr, int Node, int tl, int tr) {
+        if (tl == tr) {
+            tree[Node] = { max(0LL, arr[tl]), max(0LL, arr[tl]),
+                          max(0LL, arr[tl]), arr[tl] };
+            return;
+        }
+
+        int mid = (tl + tr) >> 1;
+
+        build(arr, 2 * Node + 1, tl, mid);
+        build(arr, 2 * Node + 2, mid + 1, tr);
+
+        tree[Node] = operation(tree[2 * Node + 1], tree[2 * Node + 2]);
+    }
+
+    Data query(int Node, int tl, int tr, int l, int r) {
+        // completely overlapping
+        if (tl >= l && tr <= r)
+            return tree[Node];
+        // out of bounds range
+        if (tl > r || tr < l)
+            return { 0, 0, 0, 0 };
+
+        // partial overlapping
+        int mid = (tl + tr) >> 1;
+
+        Data left = query(2 * Node + 1, tl, mid, l, r);
+        Data right = query(2 * Node + 2, mid + 1, tr, l, r);
+
+        return operation(left, right);
+    }
+
+    void update(int Node, int tl, int tr, int pos, int new_val) {
+        if (tl == tr)
+            tree[Node] = { max(0LL, new_val), max(0LL, new_val),
+                          max(0LL, new_val), new_val };
+        else {
+            int mid = (tl + tr) >> 1;
+
+            if (pos <= mid) // if updating index lies on the left of mid
+                update(2 * Node + 1, tl, mid, pos, new_val);
+            else // if updating index lies on the right of mid
+                update(2 * Node + 2, mid + 1, tr, pos, new_val);
+
+            tree[Node] = operation(tree[2 * Node + 1],
+                tree[2 * Node + 2]); // updating node value
+        }
+    }
+
+public:
+    void construct(vector<int>& arr, int N) {
+        this->N = N;
+        tree.resize(4 * N);
+        build(arr, 0, 0, N - 1);
+    }
+
+    int get_query(int l, int r) { return query(0, 0, N - 1, l, r).mx; }
+
+    void update_at(int pos, int new_val) { update(0, 0, N - 1, pos, new_val); }
+};
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
 
 int32_t main()
 {
