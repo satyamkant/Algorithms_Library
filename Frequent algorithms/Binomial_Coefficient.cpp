@@ -105,9 +105,9 @@ class NCR {
 
 public:
     NCR(int n) {
-        fact.resize(10001);
-        inv.resize(10001);
-        invFact.resize(10001);
+        fact.resize(n);
+        inv.resize(n);
+        invFact.resize(n);
         precompute(n);
     }
 
