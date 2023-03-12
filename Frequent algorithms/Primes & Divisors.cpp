@@ -41,7 +41,7 @@ class precal_div {
 public:
     precal_div() {
         prec();
-    };
+    }
 
     vector<int>& get_fact(int id) {
         return divisor[id];
