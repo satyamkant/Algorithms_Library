@@ -7,6 +7,7 @@ using namespace std;
 #define int long long
 
 //////// link:- https://leetcode.com/problems/maximum-number-of-robots-within-budget/ /////////////////
+//////// link:- https://codeforces.com/contest/1473/problem/D  /////////////// min max segment tree///
 
 class segment_tree {
     // tl and tr are used for the tree only 
