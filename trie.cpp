@@ -115,6 +115,8 @@ public:
 
 
 // link :- https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/
+// this same trie is used to solve cses problem also
+// link :- https://cses.fi/problemset/task/1655/
 class Trie {
     class Node {
         Node* links[2];
