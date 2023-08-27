@@ -7,7 +7,8 @@ using namespace std;
 #define int long long
 
 int32_t main() {
-
+    // the least significant bit will always divide the number
+    // eg:- 00101010111000100, in this 100(binary) will always divide the number
     int bits[32];
     int curr = 1020293;
     // storing the bits of the number curr ///
