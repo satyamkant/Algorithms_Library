@@ -97,14 +97,15 @@ class segment_tree {
     vector<int> lazy;
 
     // function to change the logic
-    int operation(int a, int b) { return __gcd(a, b); } // gcd is done here as example
-    void lazy_operation(int& a, int& b) { a *= b; } // multiply operation is done here as example
+    int operation(int a, int b) { return a + b; } // gcd is done here as example
+    void lazy_operation(int &a, int &b) {
+        a += b;
+    } // multiply operation is done here as example
 
-    void build(vector<int>& arr, int Node, int tl, int tr) {
+    void build(vector<int> &arr, int Node, int tl, int tr) {
         if (tl == tr) {
             tree[Node] = arr[tl];
-        }
-        else {
+        } else {
             int mid = (tl + tr) >> 1;
 
             build(arr, 2 * Node + 1, tl, mid);     // left child 2*Node
@@ -112,7 +113,8 @@ class segment_tree {
 
             tree[Node] =
                 operation(tree[2 * Node + 1],
-                    tree[2 * Node + 2]); // operating the left child and
+                          tree[2 * Node + 2]); // operating the left child
+            // and
             // right child results
         }
     }
@@ -122,7 +124,7 @@ class segment_tree {
         lazy_operation(lazy[Node * 2 + 1], lazy[Node]);
         lazy_operation(tree[Node * 2 + 2], lazy[Node]);
         lazy_operation(lazy[Node * 2 + 2], lazy[Node]);
-        lazy[Node] = 1;
+        lazy[Node] = 0;
     }
 
     int query(int Node, int tl, int tr, int l, int r) {
@@ -133,7 +135,7 @@ class segment_tree {
         push(Node);
         int mid = (tl + tr) >> 1;
         return operation(query(Node * 2 + 1, tl, mid, l, min(r, mid)),
-            query(Node * 2 + 2, mid + 1, tr, max(l, mid + 1), r));
+                         query(Node * 2 + 2, mid + 1, tr, max(l, mid + 1), r));
     }
 
     void range_update(int Node, int tl, int tr, int l, int r, int val) {
@@ -142,8 +144,7 @@ class segment_tree {
         if (l == tl && tr == r) {
             lazy_operation(tree[Node], val);
             lazy_operation(lazy[Node], val);
-        }
-        else {
+        } else {
             push(Node);
             int tm = (tl + tr) >> 1;
             range_update(Node * 2 + 1, tl, tm, l, min(r, tm), val);
@@ -152,13 +153,13 @@ class segment_tree {
         }
     }
 
-public:
-    void construct(vector<int>& arr, int N) {
+  public:
+    void construct(vector<int> &arr, int N) {
         this->N = N;
         tree.clear();
         lazy.clear();
         tree.resize(4 * N);
-        lazy.resize(4 * N, 1);
+        lazy.resize(4 * N, 0);
         build(arr, 0, 0, N - 1);
     }
 
