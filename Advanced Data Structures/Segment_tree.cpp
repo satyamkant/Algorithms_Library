@@ -85,6 +85,7 @@ public:
 };
 
 ///////////////////////////////// segment tree with lazy propagation ///////////////////////////
+/////////////////// Link:- https://codeforces.com/problemset/problem/1891/F //////////////////
 class segment_tree {
     // tl and tr are used for the tree only
     // l and r are used for the query range
