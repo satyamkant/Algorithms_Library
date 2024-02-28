@@ -1,3 +1,4 @@
+// use only for range min,max or GCD
 class SparseTable{
     vector<vector<int>> m;
     vector<int> bin_log;
