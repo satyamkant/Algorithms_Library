@@ -1,5 +1,8 @@
 // Author:- satyam kant//
 
+/// let num = (p1^x1)*(p2^x2)*(p3^x3)....
+/// the number of factors will be (x1+1)*(x2+1)*(x3+1)...
+
 #include <bits/stdc++.h>
 
 using namespace std;
